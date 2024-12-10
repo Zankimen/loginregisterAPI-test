@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const { Firestore } = require('@google-cloud/firestore');
 const InputError = require('../exceptions/InputError');
+const storeData = require('./storeData');
 
 const db = new Firestore({
     projectId: process.env.PROJECT_ID,
@@ -46,7 +47,7 @@ async function loginUser(email, password) {
         throw new InputError('Invalid email or password');
     }
 
-    return user.token; // Kembalikan token
+    return { token: user.token, name: user.name }; // Kembalikan token
 }
 
 module.exports = { registerUser, loginUser };

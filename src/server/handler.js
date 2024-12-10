@@ -31,12 +31,12 @@ async function loginHandler(request, h) {
         throw new InputError('Email and password are required');
     }
 
-    const token = await loginUser(email, password);
+    const { token, name } = await loginUser(email, password);
 
     const response = h.response({
         status: 'success',
         message: 'Login successful',
-        data: { token },
+        data: { token, name  },
     });
     response.code(200);
     return response;
