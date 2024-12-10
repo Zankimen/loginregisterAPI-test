@@ -13,11 +13,12 @@ async function registerHandler(request, h) {
 
     const token = await registerUser(name, email, password);
 
-    const response = h.response({
+    const response = h.response({           
         status: 'success',
         message: 'User registered successfully',
         data: { token },
     });
+    response.type('application/json');
     response.code(201);
     return response;
 }
